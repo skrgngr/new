@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background-color: #071a2b; /* deep navy */
+  color: #f5f3ef;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Banner animations for ornate effect */
+@keyframes float-1 {
+  0% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-24px) rotate(4deg); }
+  100% { transform: translateY(0) rotate(-4deg); }
+}
+@keyframes float-2 {
+  0% { transform: translateY(0) rotate(3deg); }
+  50% { transform: translateY(-30px) rotate(-3deg); }
+  100% { transform: translateY(0) rotate(3deg); }
+}
+@keyframes float-3 {
+  0% { transform: translateY(0) scale(1) rotate(-2deg); }
+  50% { transform: translateY(-18px) scale(1.02) rotate(2deg); }
+  100% { transform: translateY(0) scale(1) rotate(-2deg); }
+}
+@keyframes sparkles {
+  0% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.02); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+.animate-float-1 { animation: float-1 6s ease-in-out infinite; }
+.animate-float-2 { animation: float-2 7.5s ease-in-out infinite; }
+.animate-float-3 { animation: float-3 9s ease-in-out infinite; }
+.animate-sparkles { animation: sparkles 8s linear infinite; }
+
+/* Smaller particle dots for gold sparkle effect */
+@keyframes sparkle-dot {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  40% { opacity: 1; transform: translateY(-8px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #D4AF37;
+  opacity: 0.9;
+  filter: blur(0.6px);
+  animation: sparkle-dot 4s ease-in-out infinite;
+}
+.particle:nth-child(2n) { width:6px; height:6px; opacity:0.7 }
+
+/* Hide particle dots for simplified right-image layout */
+.particle { display: none }
+
+/* Sway animation for single right bottle */
+@keyframes sway {
+  0% { transform: rotate(-6deg) translateY(0); }
+  25% { transform: rotate(-2deg) translateY(-6px); }
+  50% { transform: rotate(6deg) translateY(-10px); }
+  75% { transform: rotate(2deg) translateY(-6px); }
+  100% { transform: rotate(-6deg) translateY(0); }
+}
+.animate-sway { transform-origin: 50% 85%; animation: sway 4s ease-in-out infinite; }
+
+.drop-shadow-2xl { filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6)); }
+
+/* Premium glow + subtle pulse for product */
+@keyframes gold-pulse {
+  0% { box-shadow: 0 8px 30px rgba(212,175,55,0.06); }
+  50% { box-shadow: 0 18px 60px rgba(212,175,55,0.12); }
+  100% { box-shadow: 0 8px 30px rgba(212,175,55,0.06); }
+}
+.img-glow { transition: box-shadow 300ms ease, transform 120ms ease; }
+.img-glow:hover { animation: gold-pulse 2.8s ease-in-out infinite; transform: translateY(-6px) scale(1.02); }
+
+/* Responsive tweaks: reduce heavy animations and spacing on small screens */
+@media (max-width: 640px) {
+  :root {
+    --container-padding: 1rem;
+  }
+  .container { padding-left: 1rem; padding-right: 1rem }
+  h1 { font-size: 1.6rem }
+  .animate-sway { animation-duration: 6s }
+  .drop-shadow-2xl { filter: drop-shadow(0 10px 18px rgba(0,0,0,0.55)); }
+}
